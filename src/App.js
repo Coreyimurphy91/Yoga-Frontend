@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
+import { DndProvider } from 'react-dnd';
+import Backend from 'react-dnd-html5-backend';
 
 // CSS
 import './App.css';
@@ -10,6 +12,7 @@ import './App.css';
 // Components
 import Signup from './components/Signup';
 import About from './components/About';
+import Dnd from './components/Dnd';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
@@ -59,24 +62,27 @@ function App() {
   }
 
   return (
-    <Router>
-    <div className="App">
-      <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
-      <div className="container mt-5">
-        <Switch>
-          <Route path='/signup' component={Signup} />
-          <Route 
-            path="/login"
-            render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
-          />
-          <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-          <Route exact path="/" component={Welcome} />
-          <Route path="/about" component={About} />
-        </Switch>
-      </div>
-      <Footer />
+    <div>
+    <Dnd/>
     </div>
-    </Router>
+    // <Router>
+    // <div className="App">
+    //   <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
+    //   <div className="container mt-5">
+    //     <Switch>
+    //       <Route path='/signup' component={Signup} />
+    //       <Route 
+    //         path="/login"
+    //         render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
+    //       />
+    //       <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
+    //       <Route exact path="/" component={Welcome} />
+    //       <Route path="/about" component={About} />
+    //     </Switch>
+    //   </div>
+    //   <Footer />
+    // </div>
+    // </Router>
   );
 }
 
