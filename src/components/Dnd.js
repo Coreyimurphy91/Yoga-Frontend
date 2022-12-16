@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 import uuid from 'react-uuid'
+import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
+
+const { REACT_APP_SERVER_URL } = process.env;
+
 
 const itemsFromBackend = [
     { id: uuid(), content: 'Warrior 1' },
@@ -28,7 +33,7 @@ const onDragEnd = (result, columns, setColumns) => {
         const sourceItems = [...sourceColumn.items];
         const destItems = [...destColumn.items];
         const [removed] = sourceItems.splice(source.index, 1);
-        destItems.splice(destination.index, 0, removed);
+        const item = destItems.splice(destination.index, 0, removed)[0]
         setColumns({
             ...columns,
             [source.droppableId]: {
@@ -40,11 +45,21 @@ const onDragEnd = (result, columns, setColumns) => {
                 items: destItems
             }
         })
+        setAuthToken(localStorage.getItem('jwtToken'));
+        axios.put(`${REACT_APP_SERVER_URL}/routines`, {poseId: item._id, action: 'add'}).then((response) => {
+            //
+            console.log('add pose');
+        }).catch((err) => {
+            console.log(err)
+        })
     } else {
+        // Add axios remove request to remove pose from routine
+
         const column = columns[source.droppableId];
         const copiedItems = [...column.items];
+        
         const [removed] = copiedItems.splice(source.index, 1);
-        copiedItems.splice(destination.index, 0, removed);
+        const item = copiedItems.splice(destination.index, 0, removed)[0]
         setColumns({
             ...columns,
             [source.droppableId]: {
@@ -52,7 +67,15 @@ const onDragEnd = (result, columns, setColumns) => {
                 items: copiedItems
             }
         })
+        setAuthToken(localStorage.getItem('jwtToken'));
+        axios.put(`${REACT_APP_SERVER_URL}/routines`, {poseId: item._id, action: 'remove'}).then((response) => {
+            //
+            console.log('add pose');
+        }).catch((err) => {
+            console.log(err)
+        })
     }
+    
 };
 
 const Dnd = () => {
