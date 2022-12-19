@@ -22,3 +22,43 @@
     font-family: Myriad Pro;
     font-weight: 700;
 }
+
+/* button */
+.button-24 {
+  background: #b0a18b;
+  border: 1px solid #8b694d;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #2b3241;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  left: 45%;
+  line-height: 16px;
+  margin-top: 50px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  position: relative;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #b0a18b;
+}
+
+.button-24:active {
+  opacity: .5;
+}

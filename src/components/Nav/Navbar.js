@@ -16,25 +16,25 @@ const Navbar = (props) => {
                 <div className="collapse navbar-collapse" id="navbarsExample07">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" style={{color:'#2b3241'}} exact to="/routine">ROUTINE BUILDER</NavLink>
+                            <NavLink className="nav-link hov" style={{color:'#2b3241'}} exact to="/routine">ROUTINE BUILDER</NavLink>
                         </li>
                     </ul>
                     {
                         props.isAuth 
                         ? <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <NavLink className="nav-link" style={{color:'#2b3241'}} to="/profile">Profile</NavLink>
+                                <NavLink className="nav-link hov" style={{color:'#2b3241'}} to="/profile">PROFILE</NavLink>
                             </li>
                             <li className="nav-item">
-                                <span onClick={props.handleLogout} className="nav-link logout-link">Logout</span>
+                                <span onClick={props.handleLogout} className="nav-link logout-link">LOGOUT</span>
                             </li>
                         </ul>
                         : <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
-                                <NavLink className="nav-link" style={{color:'#2b3241'}} to="/signup">Create Account</NavLink>
+                                <NavLink className="nav-link hov" style={{color:'#2b3241'}} to="/signup">CREATE ACCOUNT</NavLink>
                             </li>
                             <li className="nav-item">
-                                <NavLink className="nav-link" style={{color:'#2b3241'}} to="/login">Login</NavLink>
+                                <NavLink className="nav-link hov" style={{color:'#2b3241'}} to="/login">LOGIN</NavLink>
                             </li>
                           </ul>
                     }
