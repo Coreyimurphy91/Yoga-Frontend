@@ -1,0 +1,14 @@
+@import url('https://fonts.cdnfonts.com/css/myriad-pro');
+
+body {
+    font-family: Myriad Pro;
+    font-weight: 700;
+}
+
+.link {
+    color: rgb(88, 89, 91)
+}
+
+.bg {
+    background-color: #e8e2d0;
+}

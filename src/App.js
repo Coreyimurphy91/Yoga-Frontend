@@ -13,17 +13,17 @@ import './App.css';
 import Signup from './components/Signup';
 import About from './components/About';
 import Dnd from './components/Dnd';
-import Footer from './components/Footer';
+import Footer from './components/Nav/Footer';
 import Login from './components/Login';
-import Navbar from './components/Navbar';
+import Navbar from './components/Nav/Navbar';
 import Profile from './components/Profile';
-import Welcome from './components/Welcome';
+import Welcome from './components/Welcome/Welcome';
 
-const PrivateRoute = ({ component: Component, ...rest}) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   let token = localStorage.getItem('jwtToken');
   console.log('===> Hitting a Private Route');
   return <Route {...rest} render={(props) => {
-    return token ? <Component {...rest} {...props} /> : <Redirect to="/login"/>
+    return token ? <Component {...rest} {...props} /> : <Redirect to="/login" />
   }} />
 }
 
@@ -32,7 +32,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState('');
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
- 
+
   useEffect(() => {
     let token;
 
@@ -62,27 +62,27 @@ function App() {
   }
 
   return (
-    <div>
-    <Dnd/>
-    </div>
-    // <Router>
-    // <div className="App">
-    //   <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
-    //   <div className="container mt-5">
-    //     <Switch>
-    //       <Route path='/signup' component={Signup} />
-    //       <Route 
-    //         path="/login"
-    //         render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
-    //       />
-    //       <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-    //       <Route exact path="/" component={Welcome} />
-    //       <Route path="/about" component={About} />
-    //     </Switch>
-    //   </div>
-    //   <Footer />
+    // <div>
+    // <Dnd/>
     // </div>
-    // </Router>
+    <Router>
+      <div className="App">
+        <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
+        <div className="container mt-5">
+          <Switch>
+            <Route path='/signup' component={Signup} />
+            <Route
+              path="/login"
+              render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser} />}
+            />
+            <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
+            <Route exact path="/" component={Welcome} />
+            <Route path="/about" component={About} />
+          </Switch>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
