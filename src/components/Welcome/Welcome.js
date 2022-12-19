@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import fc from '../../images/fc.png'
-import './welcome.css'
+import './Welcome.css'
 
 const Welcome = () => {
     return (

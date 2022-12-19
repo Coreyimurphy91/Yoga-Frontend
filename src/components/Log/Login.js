@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 import { Redirect } from 'react-router-dom';
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 
 const { REACT_APP_SERVER_URL } = process.env;
 
@@ -44,10 +44,11 @@ const Login = (props) => {
     if (props.user) return <Redirect to="/profile" /> // double check
 
     return (
+        <div className="all">
         <div className="row mt-4">
             <div className="col-md-7 offset-md-3">
-                <div className="card card-body">
-                    <h2 className="py-2">Login</h2>
+                <div className="card card-body" style={{backgroundColor:'#b0a18b'}}>
+                    <h1 className="py-2 text-center">Login</h1>
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
@@ -61,6 +62,7 @@ const Login = (props) => {
                     </form>
                 </div>
             </div>
+        </div>
         </div>
     )
 }

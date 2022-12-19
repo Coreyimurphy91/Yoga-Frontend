@@ -10,11 +10,11 @@ import Backend from 'react-dnd-html5-backend';
 import './App.css';
 
 // Components
-import Signup from './components/Signup';
+import Signup from './components/Log/Signup';
 import About from './components/About';
 import Dnd from './components/Dnd';
 import Footer from './components/Nav/Footer';
-import Login from './components/Login';
+import Login from './components/Log/Login';
 import Navbar from './components/Nav/Navbar';
 import Profile from './components/Profile';
 import Welcome from './components/Welcome/Welcome';
@@ -78,6 +78,7 @@ function App() {
             <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
             <Route exact path="/" component={Welcome} />
             <Route path="/about" component={About} />
+            <Route path="/routine" component={Dnd} />
           </Switch>
         </div>
         <Footer />

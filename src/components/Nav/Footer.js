@@ -4,9 +4,9 @@ import './Nav.css'
 
 const Footer = () => {
     return (
-        <footer className="footer bg">
+        <footer className="footer fbg">
             <div className="container text-center">
-                <span className="text-muted">@2021 Built by SEI 802</span>
+                <span className="text-muted">©2022 FlowCreate</span>
             </div>
         </footer>
     )

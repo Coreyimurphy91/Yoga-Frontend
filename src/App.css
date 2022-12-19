@@ -3,8 +3,9 @@
 html {
   position: relative;
   min-height: 100%;
-  background-image: linear-gradient(to bottom right, #2b3241 20%, #9ea2ad);
+  background-image: linear-gradient(to right, #2b3241 20%, #9ea2ad);
 }
+
 body {
   margin-bottom: 60px; /* Margin bottom by footer height */
   font-family: 'Teko', sans-serif;

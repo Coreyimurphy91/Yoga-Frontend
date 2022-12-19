@@ -3,6 +3,8 @@
 body {
     font-family: Myriad Pro;
     font-weight: 700;
+    background-image: linear-gradient(to right, #2b3241 20%, #9ea2ad);
+    
 }
 
 .link {
@@ -10,5 +12,9 @@ body {
 }
 
 .bg {
-    background-color: #e8e2d0;
+    background-color: #b0a18b;
+}
+
+.fbg {
+    background-color: #b0a18b;
 }
