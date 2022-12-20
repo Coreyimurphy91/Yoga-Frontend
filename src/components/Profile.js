@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './RoutineList.css'
 
 const Profile = (props) => {
    const { handleLogout, user } = props;
@@ -15,10 +16,9 @@ const Profile = (props) => {
 
    const userData = user ?
    (<div>
-       <h1>Profile</h1>
-       <p>Name: {name}</p>
-       <p>Email: {email}</p>
-       <p>ID: {id}</p>
+       <h1 className='made'>Profile</h1>
+       <h2>Welcome {name}.</h2>
+       <h4>Enjoy your free yoga routine builder!</h4>
    </div>) : <h2>Loading...</h2>
 
     const errorDiv = () => {

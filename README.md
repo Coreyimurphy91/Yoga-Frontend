@@ -29,7 +29,6 @@ width="400"
 height="300">
 
 # Stretch Goals
-- Connect frontend to backend
 - Add search function to front end (search for name, tags, difficulty, etc)
 - Display pictures, difficulty, and description on frontend
 - Add time component to front end

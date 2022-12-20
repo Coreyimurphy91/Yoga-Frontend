@@ -64,7 +64,7 @@ const RoutineList = () => {
         <div>
             <div className="col-md-7 offset-md-3">
                 <div className="card card-body" style={{ backgroundColor: '#b0a18b' }}>
-                    <h1 className="py-2 text-center">Your Routines</h1>
+                    <h1 className="py-2 text-center made">Your Routines</h1>
                     <ul>
                         {renderRoutines()}
                     </ul>
@@ -73,7 +73,7 @@ const RoutineList = () => {
             <div className="row mt-4">
                 <div className="col-md-7 offset-md-3">
                     <div className="card card-body" style={{ backgroundColor: '#b0a18b' }}>
-                        <h1 className="py-2 text-center">Create a new Routine</h1>
+                        <h1 className="py-2 text-center made">Create a new Routine</h1>
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="name">Name</label>
