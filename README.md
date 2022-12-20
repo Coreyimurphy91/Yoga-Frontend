@@ -1,233 +1,89 @@
-# Setup
+# Flow Create
 
-Due to this project using an older package not fully supported on node17+ we'll need to run one initial command before we run our npm install. 
+Yoga is becoming a more prominent activity in the western world. Dozens of apps exist within the market that offer specialized routines for people to follow. These routines, eg powerflow or restorative, are built by practicing yogis who advertise their app for others to follow. 
 
-If you are on mac or linux, run the following command:
+Flow Create was created to give the user more customization of the routines people choose to build and follow. With over 100 yoga poses to choose from, the user can mix and match any of them into as many routines as they choose to create. 
 
+# Production
+
+ ## This is a **MERN** stack application.
+
+- **M**ongodb was used to store data on the user, pose, and routine models.
+- **E**xpress was used to create controllers to produce a backend api, calling GET, PUT, POST, and DELETE routes for the user, poses, and routines.
+- **R**eact was used to create an interactive front-end experience for the end user.
+- **N**ode was used to bring all the packages together to produce Flow Create.
+
+# Wire-frame for initial ideas:
+
+<img 
+src="https://i.imgur.com/Zo9UYy8.jpeg" 
+alt="Yoga-Wireframe" 
+width="400" 
+height="800">
+
+# Relationships (ERD)
+<img 
+src="https://i.imgur.com/ihBVWnT.png" 
+alt="Yoga-Wireframe" 
+width="400" 
+height="300">
+
+# Stretch Goals
+- Connect frontend to backend
+- Add search function to front end (search for name, tags, difficulty, etc)
+- Display pictures, difficulty, and description on frontend
+- Add time component to front end
+
+## Big Stretch Goals
+- Add playlist randomizer to front end based on tags or difficulty
+- Add playback component to play routine in real time on frontend
+- Add submission form of new poses to front end
+
+
+# Installation
+1. Go to the [frontend](https://github.com/Coreyimurphy91/Yoga-Frontend) and [backend](https://github.com/Coreyimurphy91/Yoga-Backend) repositories on my Github.
+2. Fork and clone each repository to your local machine. Open each in your personal IDE. You will need MongoDB installed.
+
+## Front End
+1. Install dependencies in terminal 
 ```
-export NODE_OPTIONS=--openssl-legacy-provider
+npm install
 ```
-
-for windows users use one of these two commands:
-
-command prompt: 
-
+2. Create a .env file within your frontend home directory, and add your React URL to connect to the backend.
 ```
-set NODE_OPTIONS=--openssl-legacy-provider
+echo REACT_APP_SERVER_URL=http://localhost:8000 > .env
 ```
-
-powershell:
-
+3. Start React application
 ```
-$env:NODE_OPTIONS = "--openssl-legacy-provider"
+npm start
 ```
-
-# MERN Authentication Frontend
-
-| Components | Links to Code | Description |
-| --- | --- | --- |
-| `App`| [`App`](https://github.com/romebell/mern-auth-frontend#app-component) | The component that manages the entire app |
-| `Signup`| [`Signup`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/signup.md) | Allow the user to signup |
-| `Login`| [`Login`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/login.md) | Allows the user to login to the app |
-| `Navbar`| [`Navbar`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/navbar.md) | Make `App` class component |
-| `Profile`| [`Profile`](#) | A component that displays the user profile information |
-| `setAuthToken`| [`setAuthToken`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/setAuthToken.md) | A utility function that adds a token to the `Authentication` header to manage current user |
-| `About`| [`About`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/other-components.md#about) | A component that decribes the app |
-| `Footer`| [`Footer`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/other-components.md#footer) | A footer that goes on each component |
-| `Welcome`| [`Welcome`](https://github.com/romebell/mern-auth-frontend/blob/main/docs/other-components.md#welcome) | A welcome page for the user |
-
-### `App Component`
-
-### Imports for `App`
-
-```jsx
-// Imports
-import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
-
-// CSS
-import './App.css';
-
-// Components
-import Signup from './components/Signup';
-import About from './components/About';
-import Footer from './components/Footer';
-import Login from './components/Login';
-import Navbar from './components/Navbar';
-import Profile from './components/Profile';
-import Welcome from './components/Welcome';
+## Back End
+1. Install dependencies in terminal
 ```
-
-### `useState` inside `App`
-
-```jsx
-function App() {
-  // Set state values
-  const [currentUser, setCurrentUser] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-}
+npm install
 ```
-
-### `PrivateRoute`
-
-```jsx
-const PrivateRoute = ({ component: Component, ...rest}) => {
-  let token = localStorage.getItem('jwtToken');
-  console.log('===> Hitting a Private Route');
-  return <Route {...rest} render={(props) => {
-    return token ? <Component {...rest} {...props} /> : <Redirect to="/login"/>
-  }} />
-}
+2. Create a .env file within your backend home directory, where you will add two variables.
 ```
-
-### `useEffect` inside `App`
-
-```jsx
-useEffect(() => {
-    let token;
-
-    if (!localStorage.getItem('jwtToken')) {
-      setIsAuthenticated(false);
-      console.log('====> Authenticated is now FALSE');
-    } else {
-      token = jwt_decode(localStorage.getItem('jwtToken'));
-      setAuthToken(localStorage.getItem('jwtToken'));
-      setCurrentUser(token);
-    }
-  }, []);
+touch .env
+```
+- Open your .env file. The first variable is going to be 
+```
+MONGO_CONNECTION_STRING=
+```
+- To acquire your personal Mongo connection string, you need to open up your MongoDB, right click on your cluster, and click ```copy connection string```. From there, paste it after ```MONGO_CONNECTION_STRING=``` in the .env file.
+- The second variable will be ```JWT_SECRET```. You can make it equal to any string you like. An example is below
+```
+JWT_SECRET=YourPersonalExample
+```
+3. Seed your database with the seed-examples.js file within the seed folder. To do this, type in your terminal
+```
+node seed/seed-examples.js
+```
+4. Now that your databse is populated, you can run the backend application with your terminal using the command
+```
+node app.js
 ```
 
-### `nowCurrentUser`
+## Running
 
-```jsx
-const nowCurrentUser = (userData) => {
-    console.log('===> nowCurrent is here.');
-    setCurrentUser(userData);
-    setIsAuthenticated(true);
-}
-```
-
-### `handleLogout`
-
-```jsx
-const handleLogout = () => {
-    if (localStorage.getItem('jwtToken')) {
-        // remove token for localStorage
-        localStorage.removeItem('jwtToken');
-        setCurrentUser(null);
-        setIsAuthenticated(false);
-    }
-}
-```
-
-### `return` of `App`
-
-```jsx
-return (
-<div className="App">
-    <h1>MERN Authentication</h1>
-    <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
-    <div className="container mt-5">
-        <Switch>
-            <Route path='/signup' component={Signup} />
-            <Route 
-            path="/login"
-            render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
-            />
-            <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-            <Route exact path="/" component={Welcome} />
-            <Route path="/about" component={About} />
-        </Switch>
-    </div>
-    <Footer />
-</div>
-);
-```
-
-### Finished
-
-```jsx
-// Imports
-import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
-import setAuthToken from './utils/setAuthToken';
-
-// CSS
-import './App.css';
-
-// Components
-import Signup from './components/Signup';
-import About from './components/About';
-import Footer from './components/Footer';
-import Login from './components/Login';
-import Navbar from './components/Navbar';
-import Profile from './components/Profile';
-import Welcome from './components/Welcome';
-
-const PrivateRoute = ({ component: Component, ...rest}) => {
-  let token = localStorage.getItem('jwtToken');
-  console.log('===> Hitting a Private Route');
-  return <Route {...rest} render={(props) => {
-    return token ? <Component {...rest} {...props} /> : <Redirect to="/login"/>
-  }} />
-}
-
-function App() {
-  // Set state values
-  const [currentUser, setCurrentUser] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-
- 
-  useEffect(() => {
-    let token;
-
-    if (!localStorage.getItem('jwtToken')) {
-      setIsAuthenticated(false);
-      console.log('====> Authenticated is now FALSE');
-    } else {
-      token = jwt_decode(localStorage.getItem('jwtToken'));
-      setAuthToken(localStorage.getItem('jwtToken'));
-      setCurrentUser(token);
-    }
-  }, []);
-
-  const nowCurrentUser = (userData) => {
-    console.log('===> nowCurrent is here.');
-    setCurrentUser(userData);
-    setIsAuthenticated(true);
-  }
-
-  const handleLogout = () => {
-    if (localStorage.getItem('jwtToken')) {
-      // remove token for localStorage
-      localStorage.removeItem('jwtToken');
-      setCurrentUser(null);
-      setIsAuthenticated(false);
-    }
-  }
-
-  return (
-    <div className="App">
-      <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
-      <div className="container mt-5">
-        <Switch>
-          <Route path='/signup' component={Signup} />
-          <Route 
-            path="/login"
-            render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser}/>}
-          />
-          <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-          <Route exact path="/" component={Welcome} />
-          <Route path="/about" component={About} />
-        </Switch>
-      </div>
-      <Footer />
-    </div>
-  );
-}
-
-export default App;
-```
+Now that both apps are up and running, you can start to play with Flow Create on your own local host.
