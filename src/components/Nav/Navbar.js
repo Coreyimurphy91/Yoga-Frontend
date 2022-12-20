@@ -5,7 +5,7 @@ import fc from '../../images/fc5.png'
 
 const Navbar = (props) => {
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg">
+        <nav className="navbar navbar-expand-lg navbar-dark bg" style={{borderBottomLeftRadius:'20pt'}}>
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <img src={fc} style={{width:'100px'}}alt="logo"/>
@@ -18,6 +18,9 @@ const Navbar = (props) => {
                         <li className="nav-item">
                             <NavLink className="nav-link hov" style={{color:'#2b3241'}} exact to="/routine">ROUTINE BUILDER</NavLink>
                         </li>
+                        <li className="nav-item">
+                            <NavLink className="nav-link hov" style={{color:'#2b3241'}} exact to="/about">ABOUT</NavLink>
+                        </li>
                     </ul>
                     {
                         props.isAuth 
@@ -26,7 +29,7 @@ const Navbar = (props) => {
                                 <NavLink className="nav-link hov" style={{color:'#2b3241'}} to="/profile">PROFILE</NavLink>
                             </li>
                             <li className="nav-item">
-                                <span onClick={props.handleLogout} className="nav-link logout-link">LOGOUT</span>
+                                <span onClick={props.handleLogout} className="nav-link logout-link" style={{color:'#2b3241'}}>LOGOUT</span>
                             </li>
                         </ul>
                         : <ul className="navbar-nav ml-auto">

@@ -11,7 +11,7 @@ import './App.css';
 
 // Components
 import Signup from './components/Log/Signup';
-import About from './components/About';
+import About from './components/About/About';
 import Dnd from './components/Dnd';
 import Footer from './components/Nav/Footer';
 import Login from './components/Log/Login';
@@ -65,6 +65,7 @@ function App() {
     // <div>
     // <Dnd/>
     // </div>
+    // <Dnd routineId='63a04e5845234d15ba893edf'/>
     <Router>
       <div className="App">
         <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
