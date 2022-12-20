@@ -133,13 +133,13 @@ const Dnd = (props) => {
                     items: destItems
                 }
             })
-            setAuthToken(localStorage.getItem('jwtToken'));
-            axios.put(`${REACT_APP_SERVER_URL}/routines/${routineId}`, { poseId: item._id, action: 'add' }).then((response) => {
-                //
-                console.log('add pose');
-            }).catch((err) => {
-                console.log(err)
-            })
+            // setAuthToken(localStorage.getItem('jwtToken'));
+            // axios.put(`${REACT_APP_SERVER_URL}/routines/${routineId}`, { poseId: item._id, action: 'add' }).then((response) => {
+            //     //
+            //     console.log('add pose');
+            // }).catch((err) => {
+            //     console.log(err)
+            // })
         } else {
             // Add axios remove request to remove pose from routine
 
@@ -155,13 +155,13 @@ const Dnd = (props) => {
                     items: copiedItems
                 }
             })
-            setAuthToken(localStorage.getItem('jwtToken'));
-            axios.put(`${REACT_APP_SERVER_URL}/routines`, { poseId: item._id, action: 'remove' }).then((response) => {
-                //
-                console.log('add pose');
-            }).catch((err) => {
-                console.log(err)
-            })
+            // setAuthToken(localStorage.getItem('jwtToken'));
+            // axios.put(`${REACT_APP_SERVER_URL}/routines`, { poseId: item._id, action: 'remove' }).then((response) => {
+            //     //
+            //     console.log('add pose');
+            // }).catch((err) => {
+            //     console.log(err)
+            // })
         }
 
     };
