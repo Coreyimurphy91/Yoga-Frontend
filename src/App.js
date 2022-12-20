@@ -1,6 +1,6 @@
 // Imports
 import React, { useEffect, useState } from 'react';
-import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom';
+import { Route, Routes, Navigate, Outlet, useLocation, BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { DndProvider } from 'react-dnd';
@@ -17,14 +17,24 @@ import Footer from './components/Nav/Footer';
 import Login from './components/Log/Login';
 import Navbar from './components/Nav/Navbar';
 import Profile from './components/Profile';
+import RoutineList from './components/RoutineList';
 import Welcome from './components/Welcome/Welcome';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ element: element, ...rest }) => {
+  const { pathname } = useLocation();
+
+  const [isValidToken, setIsValidToken] = useState(); // <-- initially undefined
   let token = localStorage.getItem('jwtToken');
-  console.log('===> Hitting a Private Route');
-  return <Route {...rest} render={(props) => {
-    return token ? <Component {...rest} {...props} /> : <Redirect to="/login" />
-  }} />
+  useEffect(() => {
+    // initial mount or route changed, check token
+    setIsValidToken(!!token);
+  }, [pathname]);
+
+  if (isValidToken === undefined) {
+    return null; // or loading indicator/spinner/etc
+  }
+
+  return isValidToken ? <Outlet /> : <Navigate to="/login" />
 }
 
 function App() {
@@ -58,6 +68,7 @@ function App() {
       localStorage.removeItem('jwtToken');
       setCurrentUser(null);
       setIsAuthenticated(false);
+      
     }
   }
 
@@ -70,17 +81,24 @@ function App() {
       <div className="App">
         <Navbar handleLogout={handleLogout} isAuth={isAuthenticated} />
         <div className="container mt-5">
-          <Switch>
-            <Route path='/signup' component={Signup} />
+          <Routes>
+            <Route path='/signup' element={<Signup />} />
             <Route
               path="/login"
-              render={(props) => <Login {...props} nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser} />}
+              element={<Login nowCurrentUser={nowCurrentUser} setIsAuthenticated={setIsAuthenticated} user={currentUser} />}
             />
-            <PrivateRoute path="/profile" component={Profile} user={currentUser} handleLogout={handleLogout} />
-            <Route exact path="/" component={Welcome} />
-            <Route path="/about" component={About} />
-            <Route path="/routine" component={Dnd} />
-          </Switch>
+            <Route exact path='/profile' element={<PrivateRoute />}>
+              <Route exact path='/profile' element={<Profile user={currentUser} handleLogout={handleLogout} />} />
+            </Route>
+            <Route exact path="/" element={<Welcome />} />
+            <Route path="/about" element={<About />} />
+            <Route exact path='/routine' element={<PrivateRoute />}>
+              <Route path="/routine" element={<RoutineList />} />
+            </Route>
+            <Route path='/routine/:id' element={<PrivateRoute />}>
+              <Route path="/routine/:id" element={<Dnd />} />
+            </Route>
+          </Routes>
         </div>
         <Footer />
       </div>

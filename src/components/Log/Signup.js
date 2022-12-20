@@ -1,7 +1,7 @@
 // Imports
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 const { REACT_APP_SERVER_URL } = process.env;
 
 const Signup = () => {
@@ -46,7 +46,7 @@ const Signup = () => {
         }
     }
 
-    if (redirect) return <Redirect to="/login" /> // You can have them redirected to profile (your choice)
+    if (redirect) return <Navigate to="/login" /> // You can have them redirected to profile (your choice)
 
     return (
         <div className="row mt-4">
